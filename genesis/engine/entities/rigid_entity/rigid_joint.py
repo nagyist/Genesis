@@ -84,7 +84,7 @@ class RigidJoint(RBC):
         """
         raise DeprecationError(
             "This method has been removed. Please consider operating at link-level to get the cartesian position in "
-            "word frame."
+            "word frame. Alternatively, 'get_anchor_pos' returns the anchor position of the joint in the world frame."
         )
 
     def get_quat(self):
@@ -93,7 +93,7 @@ class RigidJoint(RBC):
         """
         raise DeprecationError(
             "This method has been removed. Please consider operating at link-level to get the cartesian orientation in "
-            "word frame."
+            "word frame. Alternatively, 'get_anchor_axis' returns the anchor axis of the joint in the world frame."
         )
 
     @gs.assert_built
@@ -154,7 +154,7 @@ class RigidJoint(RBC):
         Retruns the solver parameters of the joint.
         """
         if self.is_built:
-            return self._solver.get_sol_params(joints_idx=self._idx, envs_idx=None, unsafe=True)[0]
+            return self._solver.get_sol_params(joints_idx=self._idx, envs_idx=None, unsafe=True)[..., 0, :]
         return self._sol_params
 
     # ------------------------------------------------------------------------------------
